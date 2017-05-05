@@ -59,7 +59,7 @@ public class FarmScreen extends BasicGameState {
 				plant_stage2.draw(t.getX(), t.getY());
 			else if (t.getStage() == 3)
 				plant_stage3.draw(t.getX(), t.getY());
-			else if (t.getStage() == 4)
+			else if (t.getStage() >= 4 && t.getStage() != 69)
 				plant_stage4.draw(t.getX(), t.getY());
 			else if (t.getStage() == 69)
 				tilled_dirt.draw(t.getX(), t.getY());
@@ -77,14 +77,22 @@ public class FarmScreen extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input = gc.getInput();
 		
-		if (input.isKeyPressed(input.KEY_UP))
-			player.move("up");
-		else if (input.isKeyPressed(input.KEY_DOWN))
-			player.move("down");
-		else if (input.isKeyPressed(input.KEY_RIGHT))
-			player.move("right");
-		else if (input.isKeyPressed(input.KEY_LEFT))
-			player.move("left");
+		if (input.isKeyPressed(input.KEY_UP)) {
+			if (player.getY()-80 >= 0)
+				player.move("up");
+		}
+		else if (input.isKeyPressed(input.KEY_DOWN)) {
+			if (player.getY()+80 < 720)
+				player.move("down");
+		}
+		else if (input.isKeyPressed(input.KEY_RIGHT)) {
+			if (player.getX()+80 < 1280)
+				player.move("right");
+		}	
+		else if (input.isKeyPressed(input.KEY_LEFT)) {
+			if (player.getX()-80 >= 0)
+				player.move("left");
+		}
 		else if (input.isKeyPressed(input.KEY_SPACE)) {
 			Tile currentTile = findTile(player.getX(), player.getY());
 			
@@ -111,9 +119,11 @@ public class FarmScreen extends BasicGameState {
 		for (Tile t : tiles) {
 			Random rand = new Random();
 			
-			if (rand.nextInt(1000) == 5 && t.getStage() > 0 && t.getStage() < 5)
+			if (rand.nextInt(1000) == 5 && t.getStage() > 0 && t.getStage() < 4)
 				t.setStage(t.getStage()+1);
 		}
+		
+		System.out.println(findTile(player.getX(), player.getY()).getStage());
 	}
 	
 	public Tile findTile(int x, int y) {
