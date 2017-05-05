@@ -17,7 +17,7 @@ import entities.Tile;
 public class FarmScreen extends BasicGameState {
 	
 	private Player player;
-	private Image player_hoe, player_seller, player_seeds, background, dirt, tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4;
+	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt, tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4;
 	private ArrayList<Tile> tiles;
 
 	public FarmScreen(int farmScreen) {
@@ -36,6 +36,7 @@ public class FarmScreen extends BasicGameState {
 		player_hoe = new Image("res/player_hoe.png");
 		player_seller = new Image("res/player_seller.png");
 		player_seeds = new Image("res/player_seeds.png");
+		player_buyer = new Image("res/player_buyer.png");
 		background = new Image("res/farm.png");
 		dirt = new Image("res/dirt.png");
 		tilled_dirt = new Image("res/tilled_dirt.png");
@@ -69,8 +70,13 @@ public class FarmScreen extends BasicGameState {
 			player_hoe.draw(player.getX(), player.getY());
 		else if (player.getCurrentTool().equals("seller"))
 			player_seller.draw(player.getX(), player.getY());
-		else if (player.getCurrentTool().equals("seeds"))
+		else if (player.getCurrentTool().equals("seeds")) {
 			player_seeds.draw(player.getX(), player.getY());
+			g.drawString(Integer.toString(player.getSeeds()), 1260, 690);
+		} else if (player.getCurrentTool().equals("buyer")) {
+			player_buyer.draw(player.getX(), player.getY());
+			g.drawString(Integer.toString(findTile(player.getX(), player.getY()).getStage()), 1260, 690);
+		}
 	}
 
 	@Override
@@ -101,20 +107,30 @@ public class FarmScreen extends BasicGameState {
 					currentTile.setStage(69);
 					break;
 				case "seller":
-						player.giveMoney(currentTile.getStage());
+						player.giveMoney(currentTile.getStage() * 2);
 						currentTile.setStage(0);
 					break;
 				case "seeds":
-					if (currentTile.getStage() == 69)
+					if (currentTile.getStage() == 69 && player.getSeeds() > 0) {
 						currentTile.setStage(1);
+						player.giveSeeds(-1);
+					}
+					break;
+				case "buyer":
+					if (player.getMoney() - 4 >= 0) {
+						player.giveMoney(-4);
+						player.giveSeeds(1);
+					}
 			}
 		}
 		else if (input.isKeyPressed(input.KEY_1))
 			player.setTool("hoe");
 		else if (input.isKeyPressed(input.KEY_2))
-			player.setTool("seller");
-		else if (input.isKeyPressed(input.KEY_3))
 			player.setTool("seeds");
+		else if (input.isKeyPressed(input.KEY_3))
+			player.setTool("seller");
+		else if (input.isKeyPressed(input.KEY_4))
+			player.setTool("buyer");
 		
 		for (Tile t : tiles) {
 			Random rand = new Random();
