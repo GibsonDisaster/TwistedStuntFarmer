@@ -1,5 +1,6 @@
 package screens;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,11 +18,12 @@ import entities.Tile;
 public class FarmScreen extends BasicGameState {
 	
 	private static Player player;
-	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt, tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4;
+	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt,
+	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal;
 	private ArrayList<Tile> tiles;
 
 	public FarmScreen(int farmScreen) {
-		player = new Player(320, 320);
+		player = new Player(1200, 640);
 		tiles = new ArrayList<>();
 		
 		int j = 0;
@@ -35,6 +37,28 @@ public class FarmScreen extends BasicGameState {
 			tiles.add(new Tile(j, 80));
 			j += 80;
 		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 160));
+			j += 80;
+		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 240));
+			j += 80;
+		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 320));
+			j += 80;
+		}
+	}
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		player.setY(640);
 	}
 
 	@Override
@@ -43,6 +67,7 @@ public class FarmScreen extends BasicGameState {
 		player_seller = new Image("res/player_seller.png");
 		player_seeds = new Image("res/player_seeds.png");
 		player_buyer = new Image("res/player_buyer.png");
+		town_portal = new Image("res/town_portal.png");
 		background = new Image("res/farm.png");
 		dirt = new Image("res/dirt.png");
 		tilled_dirt = new Image("res/tilled_dirt.png");
@@ -70,6 +95,8 @@ public class FarmScreen extends BasicGameState {
 				plant_stage4.draw(t.getX(), t.getY());
 			else if (t.getStage() == 69)
 				tilled_dirt.draw(t.getX(), t.getY());
+			
+			town_portal.draw(560, 640);
 		}
 		
 		if (player.getCurrentTool().equals("hoe"))
@@ -113,7 +140,7 @@ public class FarmScreen extends BasicGameState {
 					currentTile.setStage(69);
 					break;
 				case "seller":
-						player.giveMoney(currentTile.getStage() * 2);
+						player.giveMoney(currentTile.getStage() * player.getMulti());
 						currentTile.setStage(0);
 					break;
 				case "seeds":
@@ -126,6 +153,9 @@ public class FarmScreen extends BasicGameState {
 					sbg.enterState(2);
 					break;
 			}
+		} else if (input.isKeyPressed(input.KEY_ENTER)) {
+			if (checkBounds(player, 560, 640, 160, 80))
+				sbg.enterState(3);
 		}
 		else if (input.isKeyPressed(input.KEY_1))
 			player.setTool("hoe");
@@ -142,8 +172,6 @@ public class FarmScreen extends BasicGameState {
 			if (rand.nextInt(1000) == 5 && t.getStage() > 0 && t.getStage() < 4)
 				t.setStage(t.getStage()+1);
 		}
-		
-		System.out.println(findTile(player.getX(), player.getY()).getStage());
 	}
 	
 	public Tile findTile(int x, int y) {
@@ -157,6 +185,16 @@ public class FarmScreen extends BasicGameState {
 	
 	public static Player getPlayer() {
 		return player;
+	}
+	
+	public boolean checkBounds(Player player, int x, int y, int width, int height) {
+		Rectangle rect1 = new Rectangle(player.getX(), player.getY(), 80, 80);
+		Rectangle rect2 = new Rectangle(x, y, width, height);
+		
+		if (rect1.intersects(rect2))
+			return true;
+		else
+			return false;
 	}
 
 	@Override

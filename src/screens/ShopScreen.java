@@ -16,9 +16,10 @@ import logistics.Flag;
 public class ShopScreen extends BasicGameState {
 	
 	private Player player;
-	private Image seeds, pointer;
+	private Image seeds, pointer, value_up;
 	private int x, y;
 	private ArrayList<Flag> flags;
+	private boolean valueUpIsBought = false;
 	
 	public ShopScreen(int shopScreen) {
 		player = FarmScreen.getPlayer();
@@ -27,27 +28,34 @@ public class ShopScreen extends BasicGameState {
 		flags = new ArrayList<>();
 		flags.add(new Flag("seeds", 160, 160));
 		flags.add(new Flag("fertilizer", 240, 160));
-		flags.add(new Flag("coupon", 320, 160));
+		flags.add(new Flag("value up", 320, 160));
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		seeds = new Image("res/seeds.png");
 		pointer = new Image("res/pointer.png");
+		value_up = new Image("res/value.png");
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		seeds.draw(160, 160);
+		g.drawString("$4", 160, 120);
 		seeds.draw(240, 160);
-		seeds.draw(320, 160);
+		
+		if (!valueUpIsBought) {
+			value_up.draw(320, 160);
+			g.drawString("$100", 320, 120);
+		}
 		
 		pointer.draw(x, y);
 		
 		if (getFlag(x, y).equals("seeds")) {
 			g.drawString("Seeds: " + Integer.toString(player.getSeeds()), 0, 660);
-			g.drawString("Money: " + Integer.toString(player.getMoney()), 0, 690);
 		}
+		
+		g.drawString("Money: " + Integer.toString(player.getMoney()), 0, 690);
 	}
 
 	@Override
@@ -61,13 +69,19 @@ public class ShopScreen extends BasicGameState {
 		if (input.isKeyPressed(input.KEY_SPACE))
 			sbg.enterState(1);
 		if (input.isKeyPressed(input.KEY_ENTER)) {
-			if (player.getMoney() - 4 > 0) {
 				switch(getFlag(x, y)) {
 					case "seeds":
-						player.giveMoney(-4);
-						player.giveSeeds(1);
+						if (player.getMoney()-4 >= 0) {
+							player.giveMoney(-4);
+							player.giveSeeds(1);
+						}
 						break;
-				}
+					case "value up":
+						if (player.getMoney() - 100 >= 0) {
+							player.giveMoney(-100);
+							player.setMulti(2);
+							valueUpIsBought = true;
+						}
 			}
 		}
 	}

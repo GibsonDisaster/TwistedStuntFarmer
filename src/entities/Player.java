@@ -2,7 +2,7 @@ package entities;
 
 public class Player {
 
-	private int x, y, money, seeds;
+	private int x, y, money, seeds, multi;
 	String current_tool;
 	
 	public Player(int x, int y) {
@@ -11,6 +11,23 @@ public class Player {
 		this.current_tool = "hoe";
 		this.money = 0;
 		this.seeds = 4;
+		this.multi = 2;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public int getMulti() {
+		return this.multi;
+	}
+	
+	public void setMulti(int i) {
+		this.multi = i;
 	}
 	
 	public int getSeeds() {
