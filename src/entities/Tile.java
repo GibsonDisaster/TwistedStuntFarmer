@@ -3,6 +3,7 @@ package entities;
 public class Tile {
 
 	private String msg = "";
+	private String name = "";
 	private int x, y, stage;
 	
 	public Tile(int x, int y) {
@@ -11,10 +12,15 @@ public class Tile {
 		this.stage = 0;
 	}
 	
-	public Tile(int x, int y, String msg) {
+	public Tile(int x, int y, String msg, String name) {
 		this.x = x;
 		this.y = y;
 		this.msg = msg;
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	public String getMsg() {

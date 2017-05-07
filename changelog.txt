@@ -13,3 +13,7 @@ Added value up item
 Added 3 more farm rows (5 total)
 added town map
 added some npc's you can talk to
+————————
+update 3.1:
+bug fixes
+————————

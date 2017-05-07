@@ -7,14 +7,15 @@ public class TextBox {
 
 	private int x, y, width, height;
 	private boolean done;
-	private String msg;
+	private String msg, name;
 	
-	public TextBox(String msg) {
+	public TextBox(String msg, String name) {
 		this.x = 0;
 		this.y = 480;
 		this.width = 1280;
 		this.height = 240;
 		this.msg = msg;
+		this.name = name;
 		this.done = false;
 	}
 	
@@ -22,7 +23,8 @@ public class TextBox {
 		g.setColor(Color.black);
 		g.fillRect(this.x, this.y, this.width, this.height);
 		g.setColor(Color.white);
-		g.drawString(this.msg, this.x+20, this.y+20);
+		g.drawString(this.name + ":", this.x + 20, this.y + 20);
+		g.drawString(this.msg, this.x+20, this.y+60);
 	}
 
 	//Getters and Setters

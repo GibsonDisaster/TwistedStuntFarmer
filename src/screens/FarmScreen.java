@@ -140,8 +140,10 @@ public class FarmScreen extends BasicGameState {
 					currentTile.setStage(69);
 					break;
 				case "seller":
+					if (currentTile.getStage() != 69) {
 						player.giveMoney(currentTile.getStage() * player.getMulti());
 						currentTile.setStage(0);
+					}
 					break;
 				case "seeds":
 					if (currentTile.getStage() == 69 && player.getSeeds() > 0) {

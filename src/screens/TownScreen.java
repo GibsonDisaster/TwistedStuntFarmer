@@ -17,7 +17,7 @@ import logistics.TextBox;
 
 public class TownScreen extends BasicGameState{
 	
-	private Image background, player_img, town_exit, talking_img, npc_img;
+	private Image background, player_img, town_exit, talking_img, npc_img, elise_img;
 	private Player player;
 	private ArrayList<TextBox> text;
 	private ArrayList<Tile> tiles;
@@ -26,8 +26,8 @@ public class TownScreen extends BasicGameState{
 		player = FarmScreen.getPlayer();
 		text = new ArrayList<>();
 		tiles = new ArrayList<>();
-		tiles.add(new Tile(80, 240, "Hello! How are you today?"));
-		tiles.add(new Tile(800, 560, "I'm a cutie!"));
+		tiles.add(new Tile(80, 240, "Hello! How are you today?", "Jeff"));
+		tiles.add(new Tile(800, 560, "I'm a cutie!", "Elise"));
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
@@ -41,6 +41,7 @@ public class TownScreen extends BasicGameState{
 		npc_img = new Image("res/npc.png");
 		town_exit = new Image("res/town_exit.png");
 		talking_img = new Image("res/talking_point.png");
+		elise_img = new Image("res/elise.png");
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class TownScreen extends BasicGameState{
 		town_exit.draw(560, 0);
 		player_img.draw(player.getX(), player.getY());
 		
-		npc_img.draw(800, 640);
+		elise_img.draw(800, 640);
 		npc_img.draw(0, 240);
 		
 		for (Tile t : tiles) {
@@ -83,15 +84,12 @@ public class TownScreen extends BasicGameState{
 		} else if (input.isKeyPressed(input.KEY_ENTER)) {
 			if (checkBounds(player, 560, 0, 160, 80))
 				sbg.enterState(1);
-		} else if (input.isKeyPressed(input.KEY_P)) {
-			text.add(new TextBox("Hello!"));
-		} 
-		
+		}
 		if (input.isKeyPressed(input.KEY_SPACE)) {
 			if (text.isEmpty()) {
 					if (isOnTile(player)) {
 						Tile t = findTile(player.getX(), player.getY());
-						text.add(new TextBox(t.getMsg()));
+						text.add(new TextBox(t.getMsg(), t.getName()));
 					}
 			} else {
 				text.clear();
