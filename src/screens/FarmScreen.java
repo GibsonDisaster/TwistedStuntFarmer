@@ -16,17 +16,23 @@ import entities.Tile;
 
 public class FarmScreen extends BasicGameState {
 	
-	private Player player;
+	private static Player player;
 	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt, tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4;
 	private ArrayList<Tile> tiles;
 
 	public FarmScreen(int farmScreen) {
-		player = new Player(0, 0);
+		player = new Player(320, 320);
 		tiles = new ArrayList<>();
 		
 		int j = 0;
 		for (int i = 0; i < 16; i++) {
 			tiles.add(new Tile(j, 0));
+			j += 80;
+		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 80));
 			j += 80;
 		}
 	}
@@ -49,7 +55,7 @@ public class FarmScreen extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		background.draw(0, 0);
-		g.drawString(Integer.toString(player.getMoney()), 0, 690);
+		g.drawString("Money: " + Integer.toString(player.getMoney()), 0, 690);
 		
 		for (Tile t : tiles) {
 			if (t.getStage() == 0)
@@ -117,10 +123,8 @@ public class FarmScreen extends BasicGameState {
 					}
 					break;
 				case "buyer":
-					if (player.getMoney() - 4 >= 0) {
-						player.giveMoney(-4);
-						player.giveSeeds(1);
-					}
+					sbg.enterState(2);
+					break;
 			}
 		}
 		else if (input.isKeyPressed(input.KEY_1))
@@ -149,6 +153,10 @@ public class FarmScreen extends BasicGameState {
 				tile = t;
 		}
 		return tile;
+	}
+	
+	public static Player getPlayer() {
+		return player;
 	}
 
 	@Override

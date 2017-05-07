@@ -1,3 +1,8 @@
 update 1 "test":
 Added number of seeds
 Added Buyer tool
+————————
+update 2:
+Added buy screen
+added second row of farmland
+added flag system
