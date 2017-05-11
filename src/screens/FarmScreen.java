@@ -58,7 +58,9 @@ public class FarmScreen extends BasicGameState {
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
-		player.setY(640);
+		if (player.getLast_screen().equals("town"))
+			player.setY(640);
+		player.setLast_screen("farm");
 	}
 
 	@Override
@@ -152,6 +154,7 @@ public class FarmScreen extends BasicGameState {
 					}
 					break;
 				case "buyer":
+					player.setDiscount(false);
 					sbg.enterState(2);
 					break;
 			}

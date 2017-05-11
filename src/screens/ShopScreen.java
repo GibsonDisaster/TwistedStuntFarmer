@@ -17,7 +17,7 @@ public class ShopScreen extends BasicGameState {
 	
 	private Player player;
 	private Image seeds, pointer, value_up;
-	private int x, y;
+	private int x, y, seed_price;
 	private ArrayList<Flag> flags;
 	private boolean valueUpIsBought = false;
 	
@@ -30,6 +30,24 @@ public class ShopScreen extends BasicGameState {
 		flags.add(new Flag("fertilizer", 240, 160));
 		flags.add(new Flag("value up", 320, 160));
 	}
+	
+	public void enter(GameContainer gc, StateBasedGame sbg) {
+		if (player.isDiscount())
+			seed_price = 2;
+		else 
+			seed_price = 4;
+	}
+	
+	public void leave(GameContainer gc, StateBasedGame sbg) {
+		switch(player.getLast_screen()) {
+			case "farm":
+				sbg.enterState(1);
+				break;
+			case "town":
+				sbg.enterState(3);
+				break;
+		}
+	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -41,7 +59,7 @@ public class ShopScreen extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		seeds.draw(160, 160);
-		g.drawString("$4", 160, 120);
+		g.drawString(Integer.toString(seed_price), 160, 120);
 		seeds.draw(240, 160);
 		
 		if (!valueUpIsBought) {
@@ -71,8 +89,8 @@ public class ShopScreen extends BasicGameState {
 		if (input.isKeyPressed(input.KEY_ENTER)) {
 				switch(getFlag(x, y)) {
 					case "seeds":
-						if (player.getMoney()-4 >= 0) {
-							player.giveMoney(-4);
+						if (player.getMoney()-seed_price >= 0) {
+							player.giveMoney(-seed_price);
 							player.giveSeeds(1);
 						}
 						break;

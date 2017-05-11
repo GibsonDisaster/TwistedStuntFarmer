@@ -17,3 +17,6 @@ added some npc's you can talk to
 update 3.1:
 bug fixes
 ————————
+update 3.2:
+added shop stall in town.
+--gives 50% discount
