@@ -19,18 +19,13 @@ public class FarmScreen extends BasicGameState {
 	
 	private static Player player;
 	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt,
-	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal;
+	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal, barn_portal;
 	private ArrayList<Tile> tiles;
 
 	public FarmScreen(int farmScreen) {
 		player = new Player(1200, 640);
 		tiles = new ArrayList<>();
-		
 		int j = 0;
-		for (int i = 0; i < 16; i++) {
-			tiles.add(new Tile(j, 0));
-			j += 80;
-		}
 		
 		j = 0;
 		for (int i = 0; i < 16; i++) {
@@ -55,11 +50,32 @@ public class FarmScreen extends BasicGameState {
 			tiles.add(new Tile(j, 320));
 			j += 80;
 		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 400));
+			j += 80;
+		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 480));
+			j += 80;
+		}
+		
+		j = 0;
+		for (int i = 0; i < 16; i++) {
+			tiles.add(new Tile(j, 560));
+			j += 80;
+		}
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		if (player.getLast_screen().equals("town"))
 			player.setY(640);
+		else if (player.getLast_screen().equals("barn"))
+			player.setY(0);
+		
 		player.setLast_screen("farm");
 	}
 
@@ -70,6 +86,7 @@ public class FarmScreen extends BasicGameState {
 		player_seeds = new Image("res/player_seeds.png");
 		player_buyer = new Image("res/player_buyer.png");
 		town_portal = new Image("res/town_portal.png");
+		barn_portal = new Image("res/barn_entrance.png");
 		background = new Image("res/farm.png");
 		dirt = new Image("res/dirt.png");
 		tilled_dirt = new Image("res/tilled_dirt.png");
@@ -98,8 +115,12 @@ public class FarmScreen extends BasicGameState {
 			else if (t.getStage() == 69)
 				tilled_dirt.draw(t.getX(), t.getY());
 			
-			town_portal.draw(560, 640);
 		}
+		
+		town_portal.draw(560, 640);
+		
+		if (player.isBarn())
+			barn_portal.draw(560, 0);
 		
 		if (player.getCurrentTool().equals("hoe"))
 			player_hoe.draw(player.getX(), player.getY());
@@ -161,6 +182,8 @@ public class FarmScreen extends BasicGameState {
 		} else if (input.isKeyPressed(input.KEY_ENTER)) {
 			if (checkBounds(player, 560, 640, 160, 80))
 				sbg.enterState(3);
+			if (checkBounds(player, 560, 0, 160, 80) && player.isBarn())
+				sbg.enterState(4);
 		}
 		else if (input.isKeyPressed(input.KEY_1))
 			player.setTool("hoe");

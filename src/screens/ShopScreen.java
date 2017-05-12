@@ -10,13 +10,14 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import entities.Animal;
 import entities.Player;
 import logistics.Flag;
 
 public class ShopScreen extends BasicGameState {
 	
 	private Player player;
-	private Image seeds, pointer, value_up;
+	private Image seeds, pointer, value_up, barn, background, pig;
 	private int x, y, seed_price;
 	private ArrayList<Flag> flags;
 	private boolean valueUpIsBought = false;
@@ -27,8 +28,9 @@ public class ShopScreen extends BasicGameState {
 		y = 240;
 		flags = new ArrayList<>();
 		flags.add(new Flag("seeds", 160, 160));
-		flags.add(new Flag("fertilizer", 240, 160));
+		flags.add(new Flag("barn", 240, 160));
 		flags.add(new Flag("value up", 320, 160));
+		flags.add(new Flag("pig", 400, 160));
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
@@ -54,13 +56,21 @@ public class ShopScreen extends BasicGameState {
 		seeds = new Image("res/seeds.png");
 		pointer = new Image("res/pointer.png");
 		value_up = new Image("res/value.png");
+		barn = new Image("res/barn.png");
+		background = new Image("res/shop_background.png");
+		pig = new Image("res/pig_shop.png");
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		background.draw(0, 0);
+		
 		seeds.draw(160, 160);
 		g.drawString(Integer.toString(seed_price), 160, 120);
-		seeds.draw(240, 160);
+		barn.draw(240, 160);
+		g.drawString("$100", 240, 120);
+		pig.draw(400, 160);
+		g.drawString("$50", 400, 120);
 		
 		if (!valueUpIsBought) {
 			value_up.draw(320, 160);
@@ -82,7 +92,7 @@ public class ShopScreen extends BasicGameState {
 		
 		if (input.isKeyPressed(input.KEY_LEFT) && x-80 >= 160)
 			x -= 80;
-		if (input.isKeyPressed(input.KEY_RIGHT) && x+80 <= 320)
+		if (input.isKeyPressed(input.KEY_RIGHT) && x+80 <= 400)
 			x += 80;
 		if (input.isKeyPressed(input.KEY_SPACE))
 			sbg.enterState(1);
@@ -99,6 +109,18 @@ public class ShopScreen extends BasicGameState {
 							player.giveMoney(-100);
 							player.setMulti(2);
 							valueUpIsBought = true;
+						}
+						break;
+					case "barn":
+						if (player.getMoney() - 100 >= 0 && !player.isBarn()) {
+							player.giveMoney(-100);
+							player.setBarn(true);
+						}
+						break;
+					case "pig":
+						if (player.getMoney() - 50 >= 0 && player.isBarn()) {
+							player.giveMoney(-50);
+							player.addAnimals(new Animal("pig", 0, 0));
 						}
 			}
 		}

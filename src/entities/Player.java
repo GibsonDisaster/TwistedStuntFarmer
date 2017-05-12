@@ -1,24 +1,44 @@
 package entities;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Player {
 
 	private int x, y, money, seeds, multi;
-	private boolean discount;
+	private boolean discount, barn;
 	private String current_tool, last_screen;
+	private ArrayList<Animal> animals;
 	
 	public Player(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.current_tool = "hoe";
-		this.money = 0;
+		this.money = 200;
 		this.seeds = 4;
 		this.multi = 2;
 		this.discount = false;
+		this.barn = false;
 		this.last_screen = "town";
+		this.animals = new ArrayList<>();
 	}
 	
+	public void addAnimals(Animal a) {
+		this.animals.add(a);
+	}
+	
+	public ArrayList getAnimals() {
+		return this.animals;
+	}
+	
+	public boolean isBarn() {
+		return barn;
+	}
+
+	public void setBarn(boolean barn) {
+		this.barn = barn;
+	}
+
 	public String getLast_screen() {
 		return last_screen;
 	}

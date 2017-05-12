@@ -20,3 +20,7 @@ bug fixes
 update 3.2:
 added shop stall in town.
 --gives 50% discount
+————————
+update 4:
+added barn which you buy from the shop
+-can buy animals to live in it
