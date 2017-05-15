@@ -1,5 +1,5 @@
 update 1 "test":
-Added number of seeds
+Seeds are now a finite resource, must be bought from the store
 Added Buyer tool
 ————————
 update 2:
