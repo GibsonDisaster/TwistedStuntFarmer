@@ -30,6 +30,7 @@ public class QuarryScreen extends BasicGameState {
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		initBoulders();
+		player.setLast_screen("quarry");
 		player.setX(560);
 		player.setY(640);
 	}

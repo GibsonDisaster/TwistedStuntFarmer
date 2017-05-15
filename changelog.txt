@@ -1,5 +1,6 @@
+————————
 update 1 "test":
-Seeds are now a finite resource, must be bought from the store
+Added number of seeds
 Added Buyer tool
 ————————
 update 2:
@@ -28,4 +29,9 @@ added barn which you buy from the shop
 update 5:
 added quarry where you can mine rocks for gold
 must unlock quarry in the shop
+————————
+update 6:
+added more animals which can be bought through the shop.
+added way to get money from your animals.
+--various bug fixes and tweaks
 ————————

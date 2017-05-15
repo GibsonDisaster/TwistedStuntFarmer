@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Animal {
 	
-	private int x, y, newX, newY;
+	private int x, y, newX, newY, width, charge;
 	private String species;
 	private boolean picked = false;
 	private Random rand = new Random();
@@ -13,6 +13,11 @@ public class Animal {
 		this.x = x;
 		this.y = y;
 		this.species = species;
+		if (this.species.equals("chicken"))
+			this.width = 80;
+		else
+			this.width = 160;
+		this.charge = 3;
 	}
 	
 	public void pickRandLocation() {
@@ -38,6 +43,8 @@ public class Animal {
 				this.y += 1;
 			}
 		}else if (this.x == newX && this.y == newY) {
+			if (this.charge < 3)
+				this.charge += 1;
 			picked = false;
 		}
 	}
@@ -69,6 +76,18 @@ public class Animal {
 
 	public void setSpecies(String species) {
 		this.species = species;
+	}
+	
+	public int getWidth() {
+		return this.width;
+	}
+	
+	public int getCharge() {
+		return this.charge;
+	}
+	
+	public void giveCharge(int xup) {
+		this.charge = xup;
 	}
 	
 }
