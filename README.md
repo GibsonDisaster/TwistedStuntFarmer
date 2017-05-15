@@ -8,6 +8,8 @@ Space to use tool (while on the farm)
 Space to talk to people (While in town on "!" tiles)
 Enter to travel on certain spots
 
+Animals must travel to 3 different "points" (random points they walk to by their ai) in order to be sheared/milked/egg collected.
+
 TOOLS:
 1 - Hoe: used to till the dirt
 2 - Seeds: used to plant seeds
