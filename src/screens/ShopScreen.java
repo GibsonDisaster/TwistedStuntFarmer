@@ -1,6 +1,7 @@
 package screens;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -18,11 +19,13 @@ public class ShopScreen extends BasicGameState {
 	
 	private Player player;
 	private Image seeds, pointer, value_up, barn, background, pig;
-	private int x, y, seed_price;
+	private int x, y, seed_price, pig_price, value_up_price, barn_price;
 	private ArrayList<Flag> flags;
 	private boolean valueUpIsBought = false;
+	private Random rand;
 	
 	public ShopScreen(int shopScreen) {
+		rand = new Random();
 		player = FarmScreen.getPlayer();
 		x = 160;
 		y = 240;
@@ -34,10 +37,17 @@ public class ShopScreen extends BasicGameState {
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
-		if (player.isDiscount())
+		if (player.isDiscount()) {
 			seed_price = 2;
-		else 
+			pig_price = 25;
+			value_up_price = 50;
+			barn_price = 50;
+		} else {
 			seed_price = 4;
+			pig_price = 50;
+			value_up_price = 100;
+			barn_price = 100;
+		}
 	}
 	
 	public void leave(GameContainer gc, StateBasedGame sbg) {
@@ -66,21 +76,30 @@ public class ShopScreen extends BasicGameState {
 		background.draw(0, 0);
 		
 		seeds.draw(160, 160);
-		g.drawString(Integer.toString(seed_price), 160, 120);
-		barn.draw(240, 160);
-		g.drawString("$100", 240, 120);
-		pig.draw(400, 160);
-		g.drawString("$50", 400, 120);
+		g.drawString("$" + Integer.toString(seed_price), 160, 120);
+		
+		if (!player.isBarn()) {
+			barn.draw(240, 160);
+			g.drawString("$" + Integer.toString(barn_price), 240, 120);
+		}
+		
+		if (player.isBarn()) {
+			pig.draw(400, 160);
+			g.drawString("$" + Integer.toString(pig_price), 400, 120);
+		}
 		
 		if (!valueUpIsBought) {
 			value_up.draw(320, 160);
-			g.drawString("$100", 320, 120);
+			g.drawString("$" + Integer.toString(value_up_price), 320, 120);
 		}
 		
 		pointer.draw(x, y);
 		
 		if (getFlag(x, y).equals("seeds")) {
 			g.drawString("Seeds: " + Integer.toString(player.getSeeds()), 0, 660);
+		}
+		if (getFlag(x, y).equals("pig")) {
+			g.drawString("Pigs: " + Integer.toString(player.getAnimals().size()), 0, 660);
 		}
 		
 		g.drawString("Money: " + Integer.toString(player.getMoney()), 0, 690);
@@ -105,23 +124,24 @@ public class ShopScreen extends BasicGameState {
 						}
 						break;
 					case "value up":
-						if (player.getMoney() - 100 >= 0) {
-							player.giveMoney(-100);
+						if (player.getMoney() - value_up_price >= 0) {
+							player.giveMoney(-value_up_price);
 							player.setMulti(2);
 							valueUpIsBought = true;
 						}
 						break;
 					case "barn":
-						if (player.getMoney() - 100 >= 0 && !player.isBarn()) {
-							player.giveMoney(-100);
+						if (player.getMoney() - barn_price >= 0 && !player.isBarn()) {
+							player.giveMoney(-barn_price);
 							player.setBarn(true);
 						}
 						break;
 					case "pig":
-						if (player.getMoney() - 50 >= 0 && player.isBarn()) {
-							player.giveMoney(-50);
-							player.addAnimals(new Animal("pig", 0, 0));
+						if (player.getMoney() - pig_price >= 0 && player.isBarn()) {
+							player.giveMoney(-pig_price);
+							player.addAnimals(new Animal("pig", rand.nextInt(1200), rand.nextInt(640)));
 						}
+						break;
 			}
 		}
 	}

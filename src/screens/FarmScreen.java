@@ -193,6 +193,8 @@ public class FarmScreen extends BasicGameState {
 			player.setTool("seller");
 		else if (input.isKeyPressed(input.KEY_4))
 			player.setTool("buyer");
+		else if (input.isKeyPressed(input.KEY_5))
+			sbg.enterState(5);
 		
 		for (Tile t : tiles) {
 			Random rand = new Random();

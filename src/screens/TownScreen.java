@@ -116,8 +116,6 @@ public class TownScreen extends BasicGameState{
 				sbg.enterState(2);
 			}
 		}
-		
-		System.out.println(player.getX() + " " + player.getY());
 	}
 	
 	public boolean isSafe(String dir) {

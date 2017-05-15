@@ -7,6 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import screens.BarnScreen;
 import screens.FarmScreen;
+import screens.QuarryScreen;
 import screens.ShopScreen;
 import screens.StartScreen;
 import screens.TownScreen;
@@ -20,6 +21,7 @@ public class Game extends StateBasedGame {
 	private final int shopScreen = 2;
 	private final int townScreen = 3;
 	private final int barnScreen = 4;
+	private final int quarryScreen = 5;
 
 	public Game(String name) {
 		super(name);
@@ -28,6 +30,7 @@ public class Game extends StateBasedGame {
 		this.addState(new ShopScreen(shopScreen));
 		this.addState(new TownScreen(townScreen));
 		this.addState(new BarnScreen(barnScreen));
+		this.addState(new QuarryScreen(quarryScreen));
 	}
 	
 	public static void main(String[] args) {
@@ -52,6 +55,7 @@ public class Game extends StateBasedGame {
 		this.getState(shopScreen).init(gc, this);
 		this.getState(townScreen).init(gc, this);
 		this.getState(barnScreen).init(gc, this);
+		this.getState(quarryScreen).init(gc, this);
 		this.enterState(startScreen);
 	}
 
