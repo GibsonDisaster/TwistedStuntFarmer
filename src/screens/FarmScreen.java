@@ -19,7 +19,7 @@ public class FarmScreen extends BasicGameState {
 	
 	private static Player player;
 	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt,
-	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal, barn_portal;
+	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal, barn_portal, quarry_portal;
 	private ArrayList<Tile> tiles;
 
 	public FarmScreen(int farmScreen) {
@@ -75,6 +75,10 @@ public class FarmScreen extends BasicGameState {
 			player.setY(640);
 		else if (player.getLast_screen().equals("barn"))
 			player.setY(0);
+		else if (player.getLast_screen().equals("quarry")) {
+			player.setX(1120);
+			player.setY(0);
+		}
 		
 		player.setLast_screen("farm");
 	}
@@ -87,6 +91,7 @@ public class FarmScreen extends BasicGameState {
 		player_buyer = new Image("res/player_buyer.png");
 		town_portal = new Image("res/town_portal.png");
 		barn_portal = new Image("res/barn_entrance.png");
+		quarry_portal = new Image("res/quarry_portal.png");
 		background = new Image("res/farm.png");
 		dirt = new Image("res/dirt.png");
 		tilled_dirt = new Image("res/tilled_dirt.png");
@@ -121,6 +126,9 @@ public class FarmScreen extends BasicGameState {
 		
 		if (player.isBarn())
 			barn_portal.draw(560, 0);
+		
+		if (player.isQuarry())
+			quarry_portal.draw(1120, 0);
 		
 		if (player.getCurrentTool().equals("hoe"))
 			player_hoe.draw(player.getX(), player.getY());
@@ -184,6 +192,8 @@ public class FarmScreen extends BasicGameState {
 				sbg.enterState(3);
 			if (checkBounds(player, 560, 0, 160, 80) && player.isBarn())
 				sbg.enterState(4);
+			if (checkBounds(player, 1120, 0, 160, 80))
+				sbg.enterState(5);
 		}
 		else if (input.isKeyPressed(input.KEY_1))
 			player.setTool("hoe");
@@ -193,8 +203,6 @@ public class FarmScreen extends BasicGameState {
 			player.setTool("seller");
 		else if (input.isKeyPressed(input.KEY_4))
 			player.setTool("buyer");
-		else if (input.isKeyPressed(input.KEY_5))
-			sbg.enterState(5);
 		
 		for (Tile t : tiles) {
 			Random rand = new Random();

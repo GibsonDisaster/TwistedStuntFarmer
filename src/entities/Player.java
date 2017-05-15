@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Player {
 
 	private int x, y, money, seeds, multi;
-	private boolean discount, barn;
+	private boolean discount, barn, quarry;
 	private String current_tool, last_screen;
 	private ArrayList<Animal> animals;
 	
@@ -18,9 +18,18 @@ public class Player {
 		this.seeds = 4;
 		this.multi = 2;
 		this.discount = false;
+		this.quarry = false;
 		this.barn = false;
 		this.last_screen = "town";
 		this.animals = new ArrayList<>();
+	}
+	
+	public void setQuarry(boolean x) {
+		this.quarry = x;
+	}
+	
+	public boolean isQuarry() {
+		return this.quarry;
 	}
 	
 	public void addAnimals(Animal a) {

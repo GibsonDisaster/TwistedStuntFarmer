@@ -18,8 +18,8 @@ import logistics.Flag;
 public class ShopScreen extends BasicGameState {
 	
 	private Player player;
-	private Image seeds, pointer, value_up, barn, background, pig;
-	private int x, y, seed_price, pig_price, value_up_price, barn_price;
+	private Image seeds, pointer, value_up, barn, background, pig, quarry;
+	private int x, y, seed_price, pig_price, value_up_price, barn_price, quarry_price;
 	private ArrayList<Flag> flags;
 	private boolean valueUpIsBought = false;
 	private Random rand;
@@ -34,6 +34,7 @@ public class ShopScreen extends BasicGameState {
 		flags.add(new Flag("barn", 240, 160));
 		flags.add(new Flag("value up", 320, 160));
 		flags.add(new Flag("pig", 400, 160));
+		flags.add(new Flag("quarry", 480, 160));
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
@@ -42,11 +43,13 @@ public class ShopScreen extends BasicGameState {
 			pig_price = 25;
 			value_up_price = 50;
 			barn_price = 50;
+			quarry_price = 100;
 		} else {
 			seed_price = 4;
 			pig_price = 50;
 			value_up_price = 100;
 			barn_price = 100;
+			quarry_price = 200;
 		}
 	}
 	
@@ -69,6 +72,7 @@ public class ShopScreen extends BasicGameState {
 		barn = new Image("res/barn.png");
 		background = new Image("res/shop_background.png");
 		pig = new Image("res/pig_shop.png");
+		quarry = new Image("res/quarry_shop.png");
 	}
 
 	@Override
@@ -93,6 +97,11 @@ public class ShopScreen extends BasicGameState {
 			g.drawString("$" + Integer.toString(value_up_price), 320, 120);
 		}
 		
+		if (!player.isQuarry()) {
+			quarry.draw(480, 160);
+			g.drawString("$" + Integer.toString(quarry_price), 480, 120);
+		}
+		
 		pointer.draw(x, y);
 		
 		if (getFlag(x, y).equals("seeds")) {
@@ -111,7 +120,7 @@ public class ShopScreen extends BasicGameState {
 		
 		if (input.isKeyPressed(input.KEY_LEFT) && x-80 >= 160)
 			x -= 80;
-		if (input.isKeyPressed(input.KEY_RIGHT) && x+80 <= 400)
+		if (input.isKeyPressed(input.KEY_RIGHT) && x+80 <= 480)
 			x += 80;
 		if (input.isKeyPressed(input.KEY_SPACE))
 			sbg.enterState(1);
@@ -140,6 +149,12 @@ public class ShopScreen extends BasicGameState {
 						if (player.getMoney() - pig_price >= 0 && player.isBarn()) {
 							player.giveMoney(-pig_price);
 							player.addAnimals(new Animal("pig", rand.nextInt(1200), rand.nextInt(640)));
+						}
+						break;
+					case "quarry":
+						if (player.getMoney() - quarry_price >= 0 && !player.isQuarry()) {
+							player.giveMoney(-quarry_price);
+							player.setQuarry(true);
 						}
 						break;
 			}

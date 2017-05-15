@@ -24,3 +24,8 @@ added shop stall in town.
 update 4:
 added barn which you buy from the shop
 -can buy animals to live in it
+————————
+update 5:
+added quarry where you can mine rocks for gold
+must unlock quarry in the shop
+————————
