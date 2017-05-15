@@ -13,3 +13,5 @@ TOOLS:
 2 - Seeds: used to plant seeds
 3: Seller: used to sell plants on the current tile
 4: Buyer: brings up shop menu where you can buy seeds/items
+
+Check changelog.txt to see a more detailed description of the updates.
