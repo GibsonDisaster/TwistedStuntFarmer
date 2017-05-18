@@ -6,7 +6,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import screens.BarnScreen;
+import screens.BathroomScreen;
+import screens.CellarScreen;
 import screens.FarmScreen;
+import screens.ForestScreen;
+import screens.HouseScreen;
+import screens.HouseShopScreen;
+import screens.KitchenScreen;
 import screens.QuarryScreen;
 import screens.ShopScreen;
 import screens.StartScreen;
@@ -22,6 +28,12 @@ public class Game extends StateBasedGame {
 	private final int townScreen = 3;
 	private final int barnScreen = 4;
 	private final int quarryScreen = 5;
+	private final int forestScreen = 6;
+	private final int houseShopScreen = 7;
+	private final int houseScreen = 8;
+	private final int kitchenScreen = 9;
+	private final int bathroomScreen = 10;
+	private final int cellarScreen = 11;
 
 	public Game(String name) {
 		super(name);
@@ -31,6 +43,12 @@ public class Game extends StateBasedGame {
 		this.addState(new TownScreen(townScreen));
 		this.addState(new BarnScreen(barnScreen));
 		this.addState(new QuarryScreen(quarryScreen));
+		this.addState(new ForestScreen(forestScreen));
+		this.addState(new HouseShopScreen(houseShopScreen));
+		this.addState(new HouseScreen(houseScreen));
+		this.addState(new KitchenScreen(kitchenScreen));
+		this.addState(new BathroomScreen(bathroomScreen));
+		this.addState(new CellarScreen(cellarScreen));
 	}
 	
 	public static void main(String[] args) {
@@ -56,6 +74,10 @@ public class Game extends StateBasedGame {
 		this.getState(townScreen).init(gc, this);
 		this.getState(barnScreen).init(gc, this);
 		this.getState(quarryScreen).init(gc, this);
+		this.getState(forestScreen).init(gc, this);
+		this.getState(houseScreen).init(gc, this);
+		this.getState(houseShopScreen).init(gc, this);
+		this.getState(kitchenScreen).init(gc, this);
 		this.enterState(startScreen);
 	}
 

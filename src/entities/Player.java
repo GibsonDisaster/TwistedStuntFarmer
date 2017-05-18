@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private int x, y, money, seeds, multi;
-	private boolean discount, barn, quarry;
+	private int x, y, money, seeds, multi, wood;
+	private boolean discount, barn, quarry, house, kitchen, bathroom, cellar;
 	private String current_tool, last_screen;
 	private ArrayList<Animal> animals;
 	
@@ -14,14 +14,27 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		this.current_tool = "hoe";
-		this.money = 200;
+		this.money = 20;
 		this.seeds = 4;
 		this.multi = 2;
+		this.wood = 887654320;
 		this.discount = false;
 		this.quarry = false;
 		this.barn = false;
+		this.house = false;
+		this.kitchen = false;
+		this.bathroom = false;
+		this.cellar = false;
 		this.last_screen = "town";
 		this.animals = new ArrayList<>();
+	}
+	
+	public void giveWood(int s) { // ;D
+		this.wood += s;
+	}
+	
+	public int getWood() { // ;D
+		return this.wood;
 	}
 	
 	public void setQuarry(boolean x) {
@@ -100,6 +113,38 @@ public class Player {
 		this.money += m;
 	}
 	
+	public boolean isHouse() {
+		return house;
+	}
+
+	public void setHouse(boolean house) {
+		this.house = house;
+	}
+
+	public boolean isKitchen() {
+		return kitchen;
+	}
+
+	public void setKitchen(boolean kitchen) {
+		this.kitchen = kitchen;
+	}
+
+	public boolean isBathroom() {
+		return bathroom;
+	}
+
+	public void setBathroom(boolean bathroom) {
+		this.bathroom = bathroom;
+	}
+
+	public boolean isCellar() {
+		return cellar;
+	}
+
+	public void setCellar(boolean cellar) {
+		this.cellar = cellar;
+	}
+
 	public int getX() {
 		return this.x;
 	}

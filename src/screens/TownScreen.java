@@ -18,7 +18,7 @@ import logistics.TextBox;
 
 public class TownScreen extends BasicGameState{
 	
-	private Image background, player_img, town_exit, talking_img, npc_img, elise_img, front_stall, side_stall;
+	private Image background, player_img, town_exit, talking_img, npc_img, elise_img, front_stall, side_stall, carpenter_img;
 	private Player player;
 	private ArrayList<TextBox> text;
 	private ArrayList<Tile> tiles;
@@ -34,6 +34,7 @@ public class TownScreen extends BasicGameState{
 		walls.add(new Point(1120, 480));
 		walls.add(new Point(1120, 560));
 		walls.add(new Point(1200, 560));
+		walls.add(new Point(0, 0));
 		tiles.add(new Tile(80, 240, "Hello! How are you today?", "Jeff"));
 		tiles.add(new Tile(800, 560, "I'm a cutie!", "Elise"));
 	}
@@ -54,6 +55,7 @@ public class TownScreen extends BasicGameState{
 		elise_img = new Image("res/elise.png");
 		front_stall = new Image("res/front_stall.png");
 		side_stall = new Image("res/side_stall.png");
+		carpenter_img = new Image("res/carpenter_img.png");
 	}
 
 	@Override
@@ -62,6 +64,7 @@ public class TownScreen extends BasicGameState{
 		town_exit.draw(560, 0);
 		player_img.draw(player.getX(), player.getY());
 		
+		carpenter_img.draw(0, 0);
 		elise_img.draw(800, 640);
 		npc_img.draw(0, 240);
 		npc_img.draw(1200, 480);
@@ -114,6 +117,8 @@ public class TownScreen extends BasicGameState{
 			if (player.getX() == 1040 && player.getY() == 480) {
 				player.setDiscount(true);
 				sbg.enterState(2);
+			} else if (player.getX() == 80 && player.getY() == 0) {
+				sbg.enterState(7);
 			}
 		}
 	}

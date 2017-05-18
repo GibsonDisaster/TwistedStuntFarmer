@@ -19,7 +19,8 @@ public class FarmScreen extends BasicGameState {
 	
 	private static Player player;
 	private Image player_hoe, player_seller, player_seeds, player_buyer, background, dirt,
-	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal, barn_portal, quarry_portal;
+	tilled_dirt, plant_stage1, plant_stage2, plant_stage3, plant_stage4, town_portal, barn_portal, quarry_portal, forest_portal, 
+	house_portal;
 	private ArrayList<Tile> tiles;
 
 	public FarmScreen(int farmScreen) {
@@ -27,45 +28,33 @@ public class FarmScreen extends BasicGameState {
 		tiles = new ArrayList<>();
 		int j = 0;
 		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
-			tiles.add(new Tile(j, 80));
-			j += 80;
-		}
-		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
+		j = 80;
+		for (int i = 0; i < 14; i++) {
 			tiles.add(new Tile(j, 160));
 			j += 80;
 		}
 		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
+		j = 80;
+		for (int i = 0; i < 14; i++) {
 			tiles.add(new Tile(j, 240));
 			j += 80;
 		}
 		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
+		j = 80;
+		for (int i = 0; i < 14; i++) {
 			tiles.add(new Tile(j, 320));
 			j += 80;
 		}
 		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
+		j = 80;
+		for (int i = 0; i < 14; i++) {
 			tiles.add(new Tile(j, 400));
 			j += 80;
 		}
 		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
+		j = 80;
+		for (int i = 0; i < 14; i++) {
 			tiles.add(new Tile(j, 480));
-			j += 80;
-		}
-		
-		j = 0;
-		for (int i = 0; i < 16; i++) {
-			tiles.add(new Tile(j, 560));
 			j += 80;
 		}
 	}
@@ -77,6 +66,9 @@ public class FarmScreen extends BasicGameState {
 			player.setY(0);
 		else if (player.getLast_screen().equals("quarry")) {
 			player.setX(1120);
+			player.setY(0);
+		} else if (player.getLast_screen().equals("forest")) {
+			player.setX(0);
 			player.setY(0);
 		}
 		
@@ -92,6 +84,8 @@ public class FarmScreen extends BasicGameState {
 		town_portal = new Image("res/town_portal.png");
 		barn_portal = new Image("res/barn_entrance.png");
 		quarry_portal = new Image("res/quarry_portal.png");
+		forest_portal = new Image("res/forest_portal.png");
+		house_portal = new Image("res/house_portal.png");
 		background = new Image("res/farm.png");
 		dirt = new Image("res/dirt.png");
 		tilled_dirt = new Image("res/tilled_dirt.png");
@@ -122,7 +116,12 @@ public class FarmScreen extends BasicGameState {
 			
 		}
 		
+		if (player.isHouse())
+			house_portal.draw(0, 640);
+		
 		town_portal.draw(560, 640);
+		
+		forest_portal.draw(0, 0);
 		
 		if (player.isBarn())
 			barn_portal.draw(560, 0);
@@ -194,6 +193,10 @@ public class FarmScreen extends BasicGameState {
 				sbg.enterState(4);
 			if (checkBounds(player, 1120, 0, 160, 80))
 				sbg.enterState(5);
+			if (checkBounds(player, 0, 0, 160, 80))
+				sbg.enterState(6);
+			if (checkBounds(player, 0, 640, 160, 80) && player.isHouse())
+				sbg.enterState(8);
 		}
 		else if (input.isKeyPressed(input.KEY_1))
 			player.setTool("hoe");
@@ -203,6 +206,8 @@ public class FarmScreen extends BasicGameState {
 			player.setTool("seller");
 		else if (input.isKeyPressed(input.KEY_4))
 			player.setTool("buyer");
+		else if (input.isKeyPressed(input.KEY_5))
+			sbg.enterState(6);
 		
 		for (Tile t : tiles) {
 			Random rand = new Random();

@@ -35,3 +35,9 @@ added more animals which can be bought through the shop.
 added way to get money from your animals.
 --various bug fixes and tweaks
 ————————
+update 7:
+added house and rooms which can be bought from carpenter in town
+—no furniture or functionality with rooms yet (coming soon)
+added forest to collect wood for house and room construction
+changed title screen image
+————————

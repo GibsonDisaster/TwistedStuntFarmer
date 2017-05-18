@@ -18,7 +18,7 @@ public class StartScreen extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		title = new Image("res/title.jpg");
+		title = new Image("res/title.png");
 	}
 
 	@Override
