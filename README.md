@@ -1,5 +1,9 @@
 # Harvest Moon Clone
 
+Running the game:
+
+With Java installed, double click on "HarvestGame.jar" to begin playing.
+
 How to play:
 
 Arrow keys to move
