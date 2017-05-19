@@ -24,6 +24,7 @@ public class KitchenScreen extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		player.setX(560);
 		player.setY(640);
+		player.setLastScreen(getID());
 	}
 
 	@Override
@@ -67,6 +68,9 @@ public class KitchenScreen extends BasicGameState {
 			if (checkBounds(player, 560, 640, 160, 80))
 				sbg.enterState(8);
 		}
+		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 	}
 	
 	public boolean checkBounds(Player player, int x, int y, int width, int height) {

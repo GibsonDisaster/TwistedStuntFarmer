@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private int x, y, money, seeds, multi, wood;
+	private int x, y, money, seeds, multi, wood, woodYield, stoneYield, animalYield, lastScreen;
 	private boolean discount, barn, quarry, house, kitchen, bathroom, cellar;
-	private String current_tool, last_screen;
+	private String current_tool;
 	private ArrayList<Animal> animals;
 	
 	public Player(int x, int y) {
@@ -17,7 +17,7 @@ public class Player {
 		this.money = 20;
 		this.seeds = 4;
 		this.multi = 2;
-		this.wood = 887654320;
+		this.wood = 0;
 		this.discount = false;
 		this.quarry = false;
 		this.barn = false;
@@ -25,7 +25,7 @@ public class Player {
 		this.kitchen = false;
 		this.bathroom = false;
 		this.cellar = false;
-		this.last_screen = "town";
+		this.lastScreen = 1;
 		this.animals = new ArrayList<>();
 	}
 	
@@ -61,12 +61,12 @@ public class Player {
 		this.barn = barn;
 	}
 
-	public String getLast_screen() {
-		return last_screen;
+	public int getLastScreen() {
+		return this.lastScreen;
 	}
 
-	public void setLast_screen(String last_screen) {
-		this.last_screen = last_screen;
+	public void setLastScreen(int last_screen) {
+		this.lastScreen = last_screen;
 	}
 
 	public boolean isDiscount() {

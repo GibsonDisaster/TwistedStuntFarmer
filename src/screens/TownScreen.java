@@ -40,9 +40,9 @@ public class TownScreen extends BasicGameState{
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
-		if (player.getLast_screen().equals("farm"))
+		if (player.getLastScreen() == 1)
 			player.setY(0);
-		player.setLast_screen("town");
+		player.setLastScreen(getID());;
 	}
 
 	@Override
@@ -121,6 +121,9 @@ public class TownScreen extends BasicGameState{
 				sbg.enterState(7);
 			}
 		}
+		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 	}
 	
 	public boolean isSafe(String dir) {

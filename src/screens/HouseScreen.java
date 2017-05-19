@@ -24,7 +24,7 @@ public class HouseScreen extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		player.setX(560);
 		player.setY(640);
-		player.setLast_screen("house");
+		player.setLastScreen(getID());
 	}
 
 	@Override
@@ -84,6 +84,9 @@ public class HouseScreen extends BasicGameState {
 			if (checkBounds(player, 0, 640, 180, 80))
 				sbg.enterState(11);
 		}
+		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 	}
 
 	@Override

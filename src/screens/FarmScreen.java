@@ -60,19 +60,19 @@ public class FarmScreen extends BasicGameState {
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
-		if (player.getLast_screen().equals("town"))
+		if (player.getLastScreen() == 3)
 			player.setY(640);
-		else if (player.getLast_screen().equals("barn"))
+		else if (player.getLastScreen() == 4)
 			player.setY(0);
-		else if (player.getLast_screen().equals("quarry")) {
+		else if (player.getLastScreen() == 5) {
 			player.setX(1120);
 			player.setY(0);
-		} else if (player.getLast_screen().equals("forest")) {
+		} else if (player.getLastScreen() == 6) {
 			player.setX(0);
 			player.setY(0);
 		}
 		
-		player.setLast_screen("farm");
+		player.setLastScreen(getID());
 	}
 
 	@Override
@@ -208,6 +208,9 @@ public class FarmScreen extends BasicGameState {
 			player.setTool("buyer");
 		else if (input.isKeyPressed(input.KEY_5))
 			sbg.enterState(6);
+		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 		
 		for (Tile t : tiles) {
 			Random rand = new Random();

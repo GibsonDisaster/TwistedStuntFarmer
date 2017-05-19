@@ -30,7 +30,7 @@ public class QuarryScreen extends BasicGameState {
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		initBoulders();
-		player.setLast_screen("quarry");
+		player.setLastScreen(getID());
 		player.setX(560);
 		player.setY(640);
 	}
@@ -103,6 +103,9 @@ public class QuarryScreen extends BasicGameState {
 			if (checkBounds(player, 560, 640, 160, 80))
 				sbg.enterState(1);
 		}
+		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 	}
 
 	@Override

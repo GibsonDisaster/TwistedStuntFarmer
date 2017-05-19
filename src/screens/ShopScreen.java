@@ -63,14 +63,7 @@ public class ShopScreen extends BasicGameState {
 	}
 	
 	public void leave(GameContainer gc, StateBasedGame sbg) {
-		switch(player.getLast_screen()) {
-			case "farm":
-				sbg.enterState(1);
-				break;
-			case "town":
-				sbg.enterState(3);
-				break;
-		}
+		sbg.enterState(player.getLastScreen());
 	}
 
 	@Override

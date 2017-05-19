@@ -29,7 +29,7 @@ public class BarnScreen extends BasicGameState {
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		player.setY(640);
-		player.setLast_screen("barn");
+		player.setLastScreen(getID());
 		animals = player.getAnimals();
 	}
 
@@ -157,6 +157,9 @@ public class BarnScreen extends BasicGameState {
 			player_img = default_player;
 			break;
 		}
+		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 	}
 	
 	public boolean checkBounds(Player player, int x, int y, int width, int height) {

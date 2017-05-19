@@ -10,6 +10,7 @@ import screens.BathroomScreen;
 import screens.CellarScreen;
 import screens.FarmScreen;
 import screens.ForestScreen;
+import screens.HelpScreen;
 import screens.HouseScreen;
 import screens.HouseShopScreen;
 import screens.KitchenScreen;
@@ -34,6 +35,7 @@ public class Game extends StateBasedGame {
 	private final int kitchenScreen = 9;
 	private final int bathroomScreen = 10;
 	private final int cellarScreen = 11;
+	private final int helpScreen = 12;
 
 	public Game(String name) {
 		super(name);
@@ -49,6 +51,7 @@ public class Game extends StateBasedGame {
 		this.addState(new KitchenScreen(kitchenScreen));
 		this.addState(new BathroomScreen(bathroomScreen));
 		this.addState(new CellarScreen(cellarScreen));
+		this.addState(new HelpScreen(helpScreen));
 	}
 	
 	public static void main(String[] args) {
@@ -78,6 +81,7 @@ public class Game extends StateBasedGame {
 		this.getState(houseScreen).init(gc, this);
 		this.getState(houseShopScreen).init(gc, this);
 		this.getState(kitchenScreen).init(gc, this);
+		this.getState(helpScreen).init(gc, this);
 		this.enterState(startScreen);
 	}
 

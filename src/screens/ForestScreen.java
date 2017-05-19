@@ -32,7 +32,7 @@ public class ForestScreen extends BasicGameState {
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) {
 		initLogs();
-		player.setLast_screen("forest");
+		player.setLastScreen(getID());
 		player.setX(560);
 		player.setY(640);
 	}
@@ -101,6 +101,8 @@ public class ForestScreen extends BasicGameState {
 				sbg.enterState(1);
 		}
 		
+		if (input.isKeyPressed(input.KEY_H))
+			sbg.enterState(12);
 	}
 
 	@Override

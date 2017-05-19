@@ -41,3 +41,7 @@ added house and rooms which can be bought from carpenter in town
 added forest to collect wood for house and room construction
 changed title screen image
 ————————
+update 7.1:
+added stats screen, press <h> to view stats
+tweaks and fixes.
+————————
