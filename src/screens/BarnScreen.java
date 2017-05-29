@@ -82,6 +82,8 @@ public class BarnScreen extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input = gc.getInput();
 		
+		player.levelUp();
+		
 		if (input.isKeyPressed(input.KEY_UP)) {
 			if (player.getY()-80 >= 0)
 				player.move("up");
@@ -117,20 +119,23 @@ public class BarnScreen extends BasicGameState {
 				switch(current_tool) {
 				case "shears":
 					if (checkBounds(player, a) && a.getSpecies().equals("sheep") && a.getCharge() >= 3) {
-						player.giveMoney(1);
+						player.giveMoney(1 + player.getAnimal_level());
 						a.giveCharge(0);
+						player.setAnimal_xp(1);
 					}
 					break;
 				case "basket":
 					if (checkBounds(player, a) && a.getSpecies().equals("chicken") && a.getCharge() >= 3) {
-						player.giveMoney(1);
+						player.giveMoney(1 + player.getAnimal_level());
 						a.giveCharge(0);
+						player.setAnimal_xp(1);
 					}
 					break;
 				case "milker":
 					if (checkBounds(player, a) && a.getSpecies().equals("cow") && a.getCharge() >= 3) {
-						player.giveMoney(1);
+						player.giveMoney(1 + player.getAnimal_level());
 						a.giveCharge(0);
+						player.setAnimal_xp(1);
 					}
 					break;
 				}

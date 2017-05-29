@@ -75,6 +75,8 @@ public class QuarryScreen extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input = gc.getInput();
 		
+		player.levelUp();
+		
 		if (input.isKeyPressed(input.KEY_UP)) {
 			if (player.getY()-80 >= 0)
 				player.move("up");
@@ -94,7 +96,8 @@ public class QuarryScreen extends BasicGameState {
 			for (Boulder b : boulders) {
 				if (checkBounds(player, b) && b.getHealth() > 0) {
 					b.takeDamage(1);
-					player.giveMoney(2);
+					player.giveMoney(2 + player.getStone_level());
+					player.setStone_xp(1);
 				}
 			}
 		}

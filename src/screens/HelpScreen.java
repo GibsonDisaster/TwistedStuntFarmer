@@ -28,6 +28,9 @@ public class HelpScreen extends BasicGameState {
 		g.drawString("Wood: " + Integer.toString(player.getWood()), 10, 40);
 		g.drawString("Seeds: " + Integer.toString(player.getSeeds()), 10, 60);
 		g.drawString("Multiplier: " + Integer.toString(player.getMulti()), 10, 80);
+		g.drawString("Wood Cutting level: " + Integer.toString(player.getWood_level()), 10, 100);
+		g.drawString("Animal Level: " + Integer.toString(player.getAnimal_level()), 10, 120);
+		g.drawString("Stone level: " + Integer.toString(player.getStone_level()), 10, 140);
 	}
 
 	@Override

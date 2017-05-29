@@ -72,6 +72,8 @@ public class ForestScreen extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input = gc.getInput();
 		
+		player.levelUp();
+		
 		if (input.isKeyPressed(input.KEY_UP)) {
 			if (player.getY()-80 >= 0)
 				player.move("up");
@@ -91,7 +93,8 @@ public class ForestScreen extends BasicGameState {
 			for (Log b : logs) {
 				if (checkBounds(player, b) && b.getHealth() > 0) {
 					b.takeDamage(1);
-					player.giveWood(2);
+					player.giveWood(2 + player.getWood_level());
+					player.setWood_xp(1);
 				}
 			}
 		}

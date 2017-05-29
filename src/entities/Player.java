@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private int x, y, money, seeds, multi, wood, woodYield, stoneYield, animalYield, lastScreen;
+	private int x, y, money, seeds, multi, wood, woodYield, stoneYield, animalYield, lastScreen, chopped_wood, wood_xp, animal_xp, stone_xp, wood_level, animal_level, 
+	stone_level;
 	private boolean discount, barn, quarry, house, kitchen, bathroom, cellar;
 	private String current_tool;
 	private ArrayList<Animal> animals;
@@ -14,10 +15,10 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		this.current_tool = "hoe";
-		this.money = 20;
+		this.money = 2000000;
 		this.seeds = 4;
 		this.multi = 2;
-		this.wood = 0;
+		this.wood = 1000000000;
 		this.discount = false;
 		this.quarry = false;
 		this.barn = false;
@@ -27,8 +28,21 @@ public class Player {
 		this.cellar = false;
 		this.lastScreen = 1;
 		this.animals = new ArrayList<>();
+		this.animal_xp = 0;
+		this.animal_level = 0;
+		this.wood_xp = 0;
+		this.wood_level = 0;
+		this.stone_xp = 0;
+		this.stone_level = 0;
 	}
 	
+	public void levelUp() {
+		this.stone_level = Math.floorDiv(this.stone_xp, 10);
+		this.wood_level = Math.floorDiv(this.wood_xp, 10);
+		this.animal_level = Math.floorDiv(this.animal_xp, 10);
+	}
+	
+	//Getters and Setters
 	public void giveWood(int s) { // ;D
 		this.wood += s;
 	}
@@ -176,6 +190,110 @@ public class Player {
 				this.x += 80;
 				break;
 		}
+	}
+
+	public int getWoodYield() {
+		return woodYield;
+	}
+
+	public void setWoodYield(int woodYield) {
+		this.woodYield = woodYield;
+	}
+
+	public int getStoneYield() {
+		return stoneYield;
+	}
+
+	public void setStoneYield(int stoneYield) {
+		this.stoneYield = stoneYield;
+	}
+
+	public int getAnimalYield() {
+		return animalYield;
+	}
+
+	public void setAnimalYield(int animalYield) {
+		this.animalYield = animalYield;
+	}
+
+	public int getChopped_wood() {
+		return chopped_wood;
+	}
+
+	public void setChopped_wood(int chopped_wood) {
+		this.chopped_wood = chopped_wood;
+	}
+
+	public int getWood_xp() {
+		return wood_xp;
+	}
+
+	public void setWood_xp(int wood_xp) {
+		this.wood_xp += wood_xp;
+	}
+
+	public int getAnimal_xp() {
+		return animal_xp;
+	}
+
+	public void setAnimal_xp(int animal_xp) {
+		this.animal_xp += animal_xp;
+	}
+
+	public int getStone_xp() {
+		return stone_xp;
+	}
+
+	public void setStone_xp(int stone_xp) {
+		this.stone_xp += stone_xp;
+	}
+
+	public int getWood_level() {
+		return wood_level;
+	}
+
+	public void setWood_level(int wood_level) {
+		this.wood_level = wood_level;
+	}
+
+	public int getAnimal_level() {
+		return animal_level;
+	}
+
+	public void setAnimal_level(int animal_level) {
+		this.animal_level = animal_level;
+	}
+
+	public int getStone_level() {
+		return stone_level;
+	}
+
+	public void setStone_level(int stone_level) {
+		this.stone_level = stone_level;
+	}
+
+	public String getCurrent_tool() {
+		return current_tool;
+	}
+
+	public void setCurrent_tool(String current_tool) {
+		this.current_tool = current_tool;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public void setSeeds(int seeds) {
+		this.seeds = seeds;
+	}
+
+	public void setWood(int wood) {
+		this.wood = wood;
+	}
+
+	public void setAnimals(ArrayList<Animal> animals) {
+		this.animals = animals;
 	}
 	
 }
