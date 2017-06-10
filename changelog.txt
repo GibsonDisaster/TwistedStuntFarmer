@@ -49,3 +49,7 @@ update 8:
 gain XP for woodcutting, mining, and tending to animals
 --levels up respective skills, giving more yield
 ————————
+update 9:
+created a launcher to launch the game from
+--GUI and Images are still very WIP
+————————
