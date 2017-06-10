@@ -15,10 +15,10 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		this.current_tool = "hoe";
-		this.money = 2000000;
+		this.money = 0;
 		this.seeds = 4;
 		this.multi = 2;
-		this.wood = 1000000000;
+		this.wood = 0;
 		this.discount = false;
 		this.quarry = false;
 		this.barn = false;
