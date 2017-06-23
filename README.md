@@ -1,8 +1,8 @@
-# Harvest Moon Clone
+# Twisted Stunt Farmer
 
 Running the game:
 
-With Java installed, double click on "HarvestGame.jar" to begin playing.
+With Java installed, double click on "TwistedStuntFarmer.jar" to begin playing.
 
 How to play:
 
@@ -28,3 +28,5 @@ TOOLS:
 3 - Basket
 
 Check changelog.txt to see a more detailed description of the updates.
+
+Name generated from: https://videogamena.me/
