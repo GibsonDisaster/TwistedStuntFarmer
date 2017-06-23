@@ -35,6 +35,8 @@ public class TownScreen extends BasicGameState{
 		walls.add(new Point(1120, 560));
 		walls.add(new Point(1200, 560));
 		walls.add(new Point(0, 0));
+		walls.add(new Point(800, 640));
+		walls.add(new Point(0, 240));
 		tiles.add(new Tile(80, 240, "Hello! How are you today?", "Jeff"));
 		tiles.add(new Tile(800, 560, "I'm a cutie!", "Elise"));
 	}
@@ -76,6 +78,10 @@ public class TownScreen extends BasicGameState{
 			talking_img.draw(t.getX(), t.getY());
 		}
 		
+		if ((player.getX() == 80 && player.getY() == 240) || (player.getX() == 800 && player.getY() == 560)) {
+			g.drawString("press <p> to give a gift", 10, 700);
+		}
+		
 		for (TextBox t : text) {
 			t.drawBox(g);
 		}
@@ -104,6 +110,7 @@ public class TownScreen extends BasicGameState{
 			if (checkBounds(player, 560, 0, 160, 80))
 				sbg.enterState(1);
 		}
+		
 		if (input.isKeyPressed(input.KEY_SPACE)) {
 			if (text.isEmpty()) {
 					if (isOnTile(player)) {

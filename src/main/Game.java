@@ -52,21 +52,6 @@ public class Game extends StateBasedGame {
 		this.addState(new CellarScreen(cellarScreen));
 		this.addState(new HelpScreen(helpScreen));
 	}
-	
-//	public static void main(String[] args) {
-//		AppGameContainer app;
-//		
-//		try {
-//			app = new AppGameContainer(new Game("Harvest Moon"));
-//			app.setDisplayMode(WIDTH, HEIGHT, false);
-//			app.setTargetFrameRate(60);
-//            app.setVSync(true);
-//            app.setShowFPS(false);
-//            app.start();
-//		} catch (SlickException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
@@ -81,7 +66,7 @@ public class Game extends StateBasedGame {
 		this.getState(houseShopScreen).init(gc, this);
 		this.getState(kitchenScreen).init(gc, this);
 		this.getState(helpScreen).init(gc, this);
-		this.enterState(startScreen);
+		this.enterState(farmScreen);
 	}
 
 }

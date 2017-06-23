@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JPanel;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
@@ -17,11 +17,11 @@ import org.newdawn.slick.SlickException;
 public class Launcher extends JFrame implements ActionListener {
 	
 	private static boolean launched = false;
-	private JButton play;
+	private JButton play, exit;
 	static AppGameContainer app;
 	private JLabel icon = new JLabel(new ImageIcon("res/launcher.png"));
-	private JLabel infoImage = new JLabel(new ImageIcon("res/infoImage.png"));
-	private JTextArea infoPanel = new JTextArea();
+	private JLabel infoImage = new JLabel(new ImageIcon("res/title.png"));
+	private JPanel south = new JPanel();
 	
 	public Launcher() {
 		this.setSize(new Dimension(640, 480));
@@ -31,16 +31,14 @@ public class Launcher extends JFrame implements ActionListener {
 		
 		play = new JButton("Play");
 		play.addActionListener(this);
+		south.add(play);
 		
-//		infoPanel.setEditable(false);  
-//		infoPanel.setCursor(null);  
-//		infoPanel.setOpaque(false);  
-//		infoPanel.setFocusable(false);
-//		infoPanel.setText("Harvest Moon Clone" + "\n" + "A Game By Henning Tonko" + "\n" + "");
-
-		this.add(play, BorderLayout.SOUTH);
+		exit = new JButton("Exit");
+		exit.addActionListener(this);
+		south.add(exit);
+		
+		this.add(south, BorderLayout.SOUTH);
 		this.add(icon, BorderLayout.NORTH);
-//		this.add(infoPanel, BorderLayout.CENTER);
 		this.add(infoImage, BorderLayout.CENTER);
 		
 		this.setVisible(true);
@@ -55,7 +53,7 @@ public class Launcher extends JFrame implements ActionListener {
 		if (e.getSource() == play) {
 			this.setVisible(false);
 			try {
-				app = new AppGameContainer(new Game("Harvest Moon"));
+				app = new AppGameContainer(new Game("Twisted Stunt Farmer"));
 				app.setDisplayMode(1280, 720, false);
 				app.setTargetFrameRate(60);
 			    app.setVSync(true);
@@ -64,6 +62,10 @@ public class Launcher extends JFrame implements ActionListener {
 			} catch (SlickException e1) {
 				e1.printStackTrace();
 			}
+		}
+		
+		if (e.getSource() == exit) {
+			System.exit(0);
 		}
 	}
 }
