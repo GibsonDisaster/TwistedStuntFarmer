@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,8 +20,10 @@ public class Launcher extends JFrame implements ActionListener {
 	private static boolean launched = false;
 	private JButton play, exit;
 	static AppGameContainer app;
-	private JLabel icon = new JLabel(new ImageIcon("res/launcher.png"));
-	private JLabel infoImage = new JLabel(new ImageIcon("res/title.png"));
+	URL url = Launcher.class.getResource("/launcher.png");
+	URL url1 = Launcher.class.getResource("/title.png");
+	private JLabel icon = new JLabel(new ImageIcon(url));
+	private JLabel infoImage = new JLabel(new ImageIcon(url1));
 	private JPanel south = new JPanel();
 	
 	public Launcher() {
