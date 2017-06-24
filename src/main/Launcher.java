@@ -25,16 +25,19 @@ public class Launcher extends JFrame implements ActionListener {
 	private JLabel icon = new JLabel(new ImageIcon(url));
 	private JLabel infoImage = new JLabel(new ImageIcon(url1));
 	private JPanel south = new JPanel();
+	private JLabel henning = new JLabel("A Game By Henning Tonko");
 	
 	public Launcher() {
 		this.setSize(new Dimension(640, 480));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
+		this.setTitle("Twisted Stunt Farmer Launcher");
 		
 		play = new JButton("Play");
 		play.addActionListener(this);
 		south.add(play);
+		south.add(henning);
 		
 		exit = new JButton("Exit");
 		exit.addActionListener(this);
